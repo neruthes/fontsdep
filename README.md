@@ -11,7 +11,7 @@ Might be ported to Node.js in future?
 Install this package as a yarn dependency, or other package manager you prefer.
 
 ```sh
-yarn add https://github.com/neruthes/fontsdep
+yarn add 'https://github.com/neruthes/fontsdep#1.0.0'
 # Will I publish to NPM?
 ```
 
