@@ -29,11 +29,11 @@ Add some data to your package.json to declare the needed fonts.
 ```json
 {
     "fontsdep": {
-    "dest": "_fontsdir",
-    "list": [
-        "CTAN:tex-gyre/opentype/texgyretermes-regular.otf"
-    ]
-  }
+        "dest": "_fontsdir",
+        "list": [
+            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf"
+        ]
+    }
 }
 ```
 

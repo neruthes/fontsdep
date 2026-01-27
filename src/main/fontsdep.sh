@@ -139,7 +139,7 @@ case "$1" in
     self_update | u )
         if [[ "$(realpath "$0")" == "$PWD/fontsdep.sh" ]]; then
             echo "Attempting to self_update ..."
-            curl --retry https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp
+            curl --retry 20 https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp
             ### Detect this UUID to ensure successful download
             if grep ea5a57c4-4417-41c9-a83b-1e914587a50f fontsdep.sh.tmp; then
                 (mv fontsdep.sh.tmp fontsdep.sh)
