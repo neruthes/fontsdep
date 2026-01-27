@@ -37,6 +37,20 @@ Add some data to your package.json to declare the needed fonts.
 }
 ```
 
+### Installing Fonts
+Run the command manually or in a CI script.
+Or, if you use a `./make.sh path/to/target.typ` to handle complex Typst/LaTeX building workflows,
+run the command before each build.
+This tool internally has a 7-day cache policy, so font files will not be downloaded over-repetitively.
+
+```sh
+bash fontsdep.sh
+# -- OR --
+bash node_modules/fontsdep/src/main/fontsdep.sh
+```
+
+
+
 ## Managing Fonts List
 You should set a list of font file identifiers, each of them is in the `ns:path` format.
 Currently this tool supports only the `CTAN` namespace; more may be added in future.
