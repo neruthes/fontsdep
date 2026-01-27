@@ -32,8 +32,7 @@ check_bin jq
 check_bin wget
 
 
-
-
+function action__install_all() {
 # =====================================================================
 # Stage: Get config
 # =====================================================================
@@ -107,10 +106,37 @@ function _action_fetch_font() {
     echo "Fetching '$remote_url' ..."
     echo "local_path=$local_path"
     curl --location --retry 40 --retry-max-time 60 --retry-all-errors -f "$remote_url" > "$local_path" || _die 4 "Failed downloading '$remote_url' !"
-    # echo curl --location --retry 40 --retry-max-time 60 --retry-all-errors -f "$remote_url" '>' "$local_path"
 
 }
 while read -r line; do
     mkdir -p "$config_fontsdir"
     _action_fetch_font "$line"
 done <<< "$config_fontslist"
+
+
+}
+
+
+
+
+
+
+
+
+### Main
+case "$1" in
+    self_update | u )
+        if [[ "$(realpath "$0")" == "$PWD/fontsdep.sh" ]]; then
+            echo "Attempting to self_update ..."
+            curl --retry https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp
+            ### Detect this UUID to ensure successful download
+            if grep ea5a57c4-4417-41c9-a83b-1e914587a50f fontsdep.sh.tmp; then
+                (mv fontsdep.sh.tmp fontsdep.sh)
+                exit 0
+            fi
+        fi
+        ;;
+    install | i | '' )
+        action__install_all
+        ;;
+esac
