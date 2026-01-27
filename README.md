@@ -59,7 +59,11 @@ You should set a list of font file identifiers, each of them is in the `ns:path`
 Currently this tool supports only the `CTAN` namespace; more may be added in future.
 This tool will resolve an identifier to URLs.
 
-TODO: Support extracting fonts from `.deb` files fetched from distro mirrors.
+
+
+## Future Plans
+- Identifier expansion like `CTAN:dir/font-{regular,bold}.otf`.
+- Support extracting fonts from `.deb` files fetched from distro mirrors.
 
 
 
