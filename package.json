@@ -11,10 +11,8 @@
     "fontsdep": {
         "dest": "_fontsdir",
         "list": [
-            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-bold.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-italic.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-bolditalic.otf"
+            "CTAN:tex-gyre/opentype/texgyretermes-{regular,bold,italic,bolditalic}.otf",
+            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{Regular,Italic,Bold,BoldItalic}.otf"
         ]
     }
 }

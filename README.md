@@ -31,10 +31,8 @@ Add some data to your package.json to declare the needed fonts.
     "fontsdep": {
         "dest": "_fontsdir",
         "list": [
-            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-bold.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-italic.otf",
-            "CTAN:tex-gyre/opentype/texgyretermes-bolditalic.otf"
+            "CTAN:tex-gyre/opentype/texgyretermes-{regular,bold,italic,bolditalic}.otf",
+            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{Regular,Italic,Bold,BoldItalic}.otf"
         ]
     }
 }
@@ -57,12 +55,15 @@ bash node_modules/fontsdep/src/main/fontsdep.sh
 ## Managing Fonts List
 You should set a list of font file identifiers, each of them is in the `ns:path` format.
 Currently this tool supports only the `CTAN` namespace; more may be added in future.
-This tool will resolve an identifier to URLs.
+Identifier string expansion is supported; if you write `CTAN:{1,2}.otf`,
+this tool will expand it to `CTAN:1.otf` and `CTAN:2.otf` as two different URLs.
+
+This tool will resolve an identifier to a URL according to internal rules.
+In addition, you may manually specify bare URLs; we pretend as if `http` and `https` are valid namespaces.
 
 
 
 ## Future Plans
-- Identifier expansion like `CTAN:dir/font-{regular,bold}.otf`.
 - Support extracting fonts from `.deb` files fetched from distro mirrors.
 
 
