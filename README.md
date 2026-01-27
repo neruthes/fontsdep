@@ -31,7 +31,10 @@ Add some data to your package.json to declare the needed fonts.
     "fontsdep": {
         "dest": "_fontsdir",
         "list": [
-            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf"
+            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-bold.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-italic.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-bolditalic.otf"
         ]
     }
 }
