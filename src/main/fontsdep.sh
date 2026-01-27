@@ -1,6 +1,22 @@
 #!/bin/bash
 
 
+# ==============================================================================
+# Program name: fontsdep.sh
+# 
+# Copyright (c) 2026 Neruthes.
+# 
+# This script is released under the GNU GPL 2.0 license.
+# It is a very stand-alone program so you may safely put it inside
+# another project which has a different licensing scheme, as long as
+# this notice is retained here at the top of the script.
+# ==============================================================================
+
+
+
+
+
+
 cat >/dev/null << EOFEOFEOF
 [MICRO DOCUMENTATION]
 
@@ -47,9 +63,7 @@ echo "config_fontsdir=$config_fontsdir"
 config_fontslist="$(jq -r   .fontsdep.list[]    package.json)"
 [[ "$config_fontslist" == null ]] || [[ -z "$config_fontslist" ]] && _die 3 "Fonts list not configured!"
 
-config_cachetime="$(jq -r   .fontsdep.cacheLength    package.json)"
-[[ "$config_cachetime" == null ]] && config_cachetime=7
-echo "config_cachetime=$config_cachetime"
+### TODO: Configure cache days
 
 
 function _reolve_font_url () {

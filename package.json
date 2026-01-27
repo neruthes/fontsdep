@@ -11,7 +11,10 @@
     "fontsdep": {
         "dest": "_fontsdir",
         "list": [
-            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf"
+            "CTAN:tex-gyre/opentype/texgyretermes-regular.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-bold.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-italic.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-bolditalic.otf"
         ]
     }
 }

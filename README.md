@@ -7,16 +7,20 @@ Might be ported to Node.js in future?
 
 
 ## Installation
-### Explicit Dependency
-Install this package as a yarn dependency, or other flavor you prefer.
+### Flavor 1: Explicit Dependency
+Install this package as a yarn dependency, or other package manager you prefer.
 
-```
+```sh
 yarn add https://github.com/neruthes/fontsdep
+# Will I publish to NPM?
 ```
 
-### Direct Inclusion
+### Flavor 2: Direct Inclusion
 Put the `fontsdep.sh` at the root of your repository.
 You can occasionally run `bash fontsdep.sh u` to make it self-update.
+
+
+
 
 ## Usage
 ### Project Configuration
