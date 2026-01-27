@@ -89,8 +89,6 @@ function _reolve_font_url () {
 }
 
 
-
-
 # =====================================================================
 # Stage: Download fonts
 # =====================================================================
@@ -127,7 +125,6 @@ while read -r line; do
     _action_fetch_font "$line"
 done <<< "$config_fontslist"
 
-
 }
 
 
@@ -154,3 +151,4 @@ case "$1" in
         action__install_all
         ;;
 esac
+
