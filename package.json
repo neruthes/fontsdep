@@ -1,0 +1,17 @@
+{
+  "name": "fontsdep",
+  "version": "1.0.0",
+  "description": "Per-repository on-demand font dependency installer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 0"
+  },
+  "author": "Neruthes",
+  "license": "GPL-2.0-only",
+  "fontsdep": {
+    "dest": "_fontsdir",
+    "list": [
+        "CTAN:tex-gyre/opentype/texgyretermes-regular.otf"
+    ]
+  }
+}
