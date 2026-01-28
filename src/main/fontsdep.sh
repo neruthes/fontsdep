@@ -25,7 +25,7 @@ Workflow when running this script:
 - Get config from package.json or somewhere else.
 - Create directories.
 - Resolve list of font files.
-- Skip some existing fonts files or download new ones.
+- Skip some existing font files or download new ones.
 EOFEOFEOF
 
 
@@ -46,6 +46,11 @@ function check_bin () {
 }
 check_bin jq
 check_bin wget
+
+
+
+
+
 
 
 function action__install_all() {
@@ -106,8 +111,6 @@ function _reolve_font_url () {
             ;;
     esac
 }
-
-
 # =====================================================================
 # Stage: Download fonts
 # =====================================================================
@@ -154,10 +157,7 @@ while read -r line; do
     mkdir -p "$config_fontsdir"
     _action_fetch_font "$line"
 done <<< "$target_list_after_expansion"
-
 }
-
-
 
 
 
@@ -167,8 +167,10 @@ done <<< "$target_list_after_expansion"
 ### Main
 case "$1" in
     self_update | u )
+        [[ "$(basename "$PWD")" == "fontsdep" ]] && exit 0
         if [[ "$(realpath "$0")" == "$PWD/fontsdep.sh" ]]; then
             echo "Attempting to self_update ..."
+            echo "[WARN] Consider risk of supply chain attack. You have been warned!"
             curl --retry 20 https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp || _die 25 "Cannot download updated self"
             ### Detect this UUID to ensure successful download
             if grep -qs ea5a57c4-4417-41c9-a83b-1e914587a50f fontsdep.sh.tmp; then
@@ -177,7 +179,13 @@ case "$1" in
             fi
         fi
         ;;
-    install | i | '' )
+    install | i )
+        action__install_all
+        ;;
+    '' )
+        if [[ -n "$(find "$0" -mtime +7)" ]]; then ### Old enough
+            (bash "$0" u)
+        fi
         action__install_all
         ;;
 esac
