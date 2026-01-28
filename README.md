@@ -54,12 +54,18 @@ bash node_modules/fontsdep/src/main/fontsdep.sh
 
 ## Managing Fonts List
 You should set a list of font file identifiers, each of them is in the `ns:path` format.
-Currently this tool supports only the `CTAN` namespace; more may be added in future.
 Identifier string expansion is supported; if you write `CTAN:{1,2}.otf`,
 this tool will expand it to `CTAN:1.otf` and `CTAN:2.otf` as two different URLs.
-
 This tool will resolve an identifier to a URL according to internal rules.
-In addition, you may manually specify bare URLs; we pretend as if `http` and `https` are valid namespaces.
+
+### Namespaces
+- `CTAN`: Expands to `https://mirrors.ctan.org/fonts/` so the path part starts with `tex-gyre`, etc.
+- `https` and `http`: Passes through as raw URL.
+
+### Formats
+If URL ends with certain string, this tool will do special handling after downloading.
+
+- `.zip`: Creates corresponding `X.zip.d` directory and extracts archived files into it and deletes all files except `*.{otf,ttf,ttc}`.
 
 
 
