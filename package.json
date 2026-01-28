@@ -12,7 +12,8 @@
         "dest": "_fontsdir",
         "list": [
             "CTAN:tex-gyre/opentype/texgyretermes-{regular,bold,italic,bolditalic}.otf",
-            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{Regular,Italic,Bold,BoldItalic}.otf"
+            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{Regular,Italic,Bold,BoldItalic}.otf",
+            "https://github.com/vercel/geist-font/releases/download/1.6.0/geist-font-1.6.0.zip"
         ]
     }
 }

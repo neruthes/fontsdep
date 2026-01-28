@@ -126,6 +126,16 @@ function _decider_skip_download_task() {
         return 1
     fi
 }
+function _hookAfterDownload() {
+    line="$1"
+    remote_url="$2"
+    local_path="$3"
+    case "$local_path" in
+        *.zip )
+            (cd "$(dirname "$local_path")" && unzip "$(basename "$local_path")")
+            ;;
+    esac
+}
 function _action_fetch_font() {
     line="$1"
     _reolve_font_url "$line" || _die 3 "Cannot resolve namespace '$line' !" 
@@ -135,12 +145,13 @@ function _action_fetch_font() {
     local_path="$config_fontsdir/${item_name_hash}-${item_basename}"
     if _decider_skip_download_task "$local_path"; then
         echo "[INFO] Skipping '$local_path' for it is still very new"
+        _hookAfterDownload "$line" "$remote_url" "$local_path" ### Even if downloaded file is new, we should still run hook
         return 0
     fi
     echo "Fetching '$remote_url' ..."
     echo "local_path=$local_path"
     curl --location --retry 40 --retry-max-time 60 --retry-all-errors -f "$remote_url" > "$local_path" || _die 4 "Failed downloading '$remote_url' !"
-
+    _hookAfterDownload "$line" "$remote_url" "$local_path"
 }
 
 ### Expand list
