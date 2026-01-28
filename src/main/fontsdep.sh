@@ -131,8 +131,17 @@ function _hookAfterDownload() {
     remote_url="$2"
     local_path="$3"
     case "$local_path" in
-        *.zip )
-            (cd "$(dirname "$local_path")" && unzip "$(basename "$local_path")")
+        *.zip)
+            extract_to="$local_path.d"
+            rm -rf "$extract_to"
+            mkdir -p "$extract_to"
+            unzip -o "$local_path" -d "$extract_to"
+            find "$extract_to" -type f | while read -r file_path; do
+                if [[ ! "$file_path" =~ \.(otf|OTF|ttf|TTF|ttc|TTC)$ ]]; then
+                    rm "$file_path"
+                fi
+            done
+            find "$extract_to" -depth -type d -empty -delete
             ;;
     esac
 }
