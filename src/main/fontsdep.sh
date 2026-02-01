@@ -54,7 +54,7 @@ check_bin wget
 
 
 
-function action__install_all() {
+function SUBCMD__install_all() {
 # =====================================================================
 # Stage: Get config
 # =====================================================================
@@ -191,8 +191,8 @@ case "$1" in
     self_update | u )
         [[ "$(basename "$PWD")" == "fontsdep" ]] && exit 0
         if [[ "$(realpath "$0")" == "$PWD/fontsdep.sh" ]]; then
+            echo "[WARN] Consider the risk of supply chain attack. You have been warned!"
             echo "Attempting to self_update ..."
-            echo "[WARN] Consider risk of supply chain attack. You have been warned!"
             curl --retry 20 https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp || _die 25 "Cannot download updated self"
             ### Detect this UUID to ensure successful download
             if grep -qs ea5a57c4-4417-41c9-a83b-1e914587a50f fontsdep.sh.tmp; then
@@ -202,13 +202,13 @@ case "$1" in
         fi
         ;;
     install | i )
-        action__install_all
+        SUBCMD__install_all
         ;;
     '' )
         if [[ -n "$(find "$0" -mtime +7)" ]]; then ### Old enough
             (bash "$0" u)
         fi
-        action__install_all
+        SUBCMD__install_all
         ;;
 esac
 

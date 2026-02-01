@@ -11,13 +11,13 @@ Might be ported to Node.js in future?
 Install this package as a yarn dependency, or other package manager you prefer.
 
 ```sh
-yarn add 'https://github.com/neruthes/fontsdep#1.0.0'
+yarn add 'https://github.com/neruthes/fontsdep#1.2.0'
 # Will I publish to NPM?
 ```
 
 ### Flavor 2: Direct Inclusion
 Put the `fontsdep.sh` at the root of your repository.
-You can occasionally run `bash fontsdep.sh u` to make it self-update.
+You can occasionally run `bash fontsdep.sh u` to make it self-update, but consider the risk of supply chain attack!
 
 
 
