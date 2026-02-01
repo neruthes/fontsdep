@@ -10,6 +10,7 @@
 # It is a very stand-alone program so you may safely put it inside
 # another project which has a different licensing scheme, as long as
 # this notice is retained here at the top of the script.
+# Permission is granted to redistribute verbatim copies.
 # ==============================================================================
 
 
@@ -137,7 +138,8 @@ function _hookAfterDownload() {
             mkdir -p "$extract_to"
             unzip -o "$local_path" -d "$extract_to"
             find "$extract_to" -type f | while read -r file_path; do
-                if [[ ! "$file_path" =~ \.(otf|OTF|ttf|TTF|ttc|TTC)$ ]]; then
+                if [[ ! "${file_path,,}" =~ \.(otf|ttf|ttc)$ ]]; then
+                    ### TODO: Another condition check to retain files with an extension name found in $(jq .fontsdep.zip_extra_retainable_extensions package.json)
                     rm "$file_path"
                 fi
             done
