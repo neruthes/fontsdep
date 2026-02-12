@@ -54,8 +54,7 @@ bash node_modules/fontsdep/src/main/fontsdep.sh
 
 ## Managing Fonts List
 You should set a list of font file identifiers, each of them is in the `ns:path` format.
-Identifier string expansion is supported; if you write `CTAN:{1,2}.otf`,
-this tool will expand it to `CTAN:1.otf` and `CTAN:2.otf` as two different URLs.
+Identifier string expansion is supported; see section for Macros Expansion.
 This tool will resolve an identifier to a URL according to internal rules.
 
 ### Namespaces
@@ -67,6 +66,31 @@ If URL ends with certain string, this tool will do special handling after downlo
 
 - `.zip`: Creates corresponding `X.zip.d` directory and extracts archived files into it and deletes all files except `*.{otf,ttf,ttc}`.
 
+
+## Macro Expansion
+
+### Phase 1: Shortcuts
+Example Input: `CTAN:some-font-{{rbi}}.otf`
+
+Example Output: `CTAN:some-font-{regular,bold,italic,bolditalic}.otf`
+
+Full table:
+
+| Shortcut  | Output                             |
+| --------- | ---------------------------------- |
+| `{{rbi}}` | `{regular,bold,italic,bolditalic}` |
+| `{{RBI}}` | `{Regular,Bold,Italic,BoldItalic}` |
+
+
+### Phase 2: Comma Delimited List
+Input: `CTAN:some-font-{regular,bold}.otf`
+
+Expanded:
+
+```
+CTAN:some-font-regular.otf
+CTAN:some-font-regular.otf
+```
 
 
 ## Future Plans

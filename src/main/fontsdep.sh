@@ -166,8 +166,14 @@ function _action_fetch_font() {
 }
 
 ### Expand list
+function _macro_expand() {
+    local line="$1"
+    echo "$line" |
+        sed "s/{{rbi}}/{regular,bold,italic,bolditalic}/g" |
+        sed "s/{{RBI}}/{Regular,Bold,Italic,BoldItalic}/g"
+}
 target_list_after_expansion="$(while read -r line; do
-    _expand_str "$line"
+    _expand_str "$(_macro_expand "$line")"
 done <<< "$config_fontslist" | sort -u)"
 
 echo "(debug)  Resolved fonts list:

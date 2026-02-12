@@ -1,6 +1,6 @@
 {
     "name": "fontsdep",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "Per-repository on-demand font dependency installer",
     "main": "index.js",
     "scripts": {
@@ -11,8 +11,8 @@
     "fontsdep": {
         "dest": "_fontsdir",
         "list": [
-            "CTAN:tex-gyre/opentype/texgyretermes-{regular,bold,italic,bolditalic}.otf",
-            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{Regular,Italic,Bold,BoldItalic}.otf",
+            "CTAN:tex-gyre/opentype/texgyretermes-{{rbi}}.otf",
+            "https://github.com/stipub/stixfonts/raw/refs/heads/master/fonts/static_otf/STIXTwoText-{{RBI}.otf",
             "https://github.com/vercel/geist-font/releases/download/1.6.0/geist-font-1.6.0.zip"
         ]
     }
