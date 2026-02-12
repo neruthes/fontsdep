@@ -145,6 +145,9 @@ function _hookAfterDownload() {
             done
             find "$extract_to" -depth -type d -empty -delete
             ;;
+        *.woff2 )
+            command -v woff2_decompress > /dev/null 2>&1 || return 0
+            woff2_decompress "$local_path"
     esac
 }
 function _action_fetch_font() {
@@ -195,14 +198,16 @@ done <<< "$target_list_after_expansion"
 ### Main
 case "$1" in
     self_update | u )
+        rp0="$(realpath "$0")"
         [[ "$(basename "$PWD")" == "fontsdep" ]] && exit 0
-        if [[ "$(realpath "$0")" == "$PWD/fontsdep.sh" ]]; then
+        if [[ "$rp0" == "$PWD/fontsdep.sh" ]] || [[ "$rp0" == "$HOME/.local/bin/fontsdep.sh" ]]; then
+            ### Install to local?   $    install -m 755 src/main/fontsdep.sh ~/.local/bin/fontsdep.sh
             echo "[WARN] Consider the risk of supply chain attack. You have been warned!"
             echo "Attempting to self_update ..."
-            curl --retry 20 https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > fontsdep.sh.tmp || _die 25 "Cannot download updated self"
+            curl --retry 20 https://raw.githubusercontent.com/neruthes/fontsdep/refs/heads/master/src/main/fontsdep.sh > "$rp0.tmp" || _die 25 "Cannot download updated self"
             ### Detect this UUID to ensure successful download
-            if grep -qs ea5a57c4-4417-41c9-a83b-1e914587a50f fontsdep.sh.tmp; then
-                (mv fontsdep.sh.tmp fontsdep.sh)
+            if grep -qs ea5a57c4-4417-41c9-a83b-1e914587a50f "$rp0.tmp"; then
+                ( chmod +x "$rp0.tmp" && mv "$rp0.tmp" "$rp0" )
                 exit 0
             fi
         fi
